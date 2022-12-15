@@ -12,11 +12,11 @@ function addNewLaunch(req, res) {
     !launch.launchDate ||
     !launch.target
   ) {
-    return res.status(401).json({ error: "All Fields are required!" });
+    return res.status(400).json({ error: "All Fields are required!" });
   }
   launch.launchDate = new Date(launch.launchDate);
   if (isNaN(launch.launchDate)) {
-    return res.status(401).json({ error: "Date is not valid" });
+    return res.status(400).json({ error: "Date is not valid" });
   }
   createLaunch(launch);
   return res.status(201).json(launch);
