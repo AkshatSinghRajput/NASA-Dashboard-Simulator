@@ -1,0 +1,19 @@
+{
+  "name": "nasa-application",
+  "version": "1.0.0",
+  "description": "This is a Full Stack NASA Launch Project Simulator",
+  "main": "index.js",
+  "scripts": {
+    "server-install": "npm install --prefix Server",
+    "client-install": "npm install --prefix Client",
+    "install": "npm run server-install && npm run client-install",
+    "server": "npm start --prefix Server",
+    "client": "npm start --prefix Client",
+    "watch": "npm run server & npm run client",
+    "deploy":"npm run build --prefix Client && npm start --prefix Server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
