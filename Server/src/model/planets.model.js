@@ -2,7 +2,7 @@ const { parse } = require("csv-parse");
 const path = require("path");
 const fs = require("fs");
 
-const habitablePlanet = [];
+const planetModel = require("../model/planets.mongo");
 
 const inhabitablePlanet = (planet) => {
   return (
@@ -14,7 +14,7 @@ const inhabitablePlanet = (planet) => {
 };
 
 // The pipe function connects the readable stream to writable stream
-function loadPlanets(){
+function loadPlanets() {
   return new Promise((resolve, reject) => {
     fs.createReadStream(path.join(__dirname, "..", "data", "data.csv"))
       .pipe(
@@ -26,7 +26,7 @@ function loadPlanets(){
       )
       .on("data", (data) => {
         if (inhabitablePlanet(data)) {
-          habitablePlanet.push(data);
+          createPlanet(data);
         }
       })
       .on("error", (err) => {
@@ -35,10 +35,21 @@ function loadPlanets(){
       })
       .on("end", () => {
         resolve();
-        console.log("Session Ended");
       });
-   
   });
-};
+}
+async function getAllPlanets() {
+  return await planetModel.find({}, "-_id -__v");
+}
 
-module.exports = { loadPlanets, planets: habitablePlanet };
+async function createPlanet(planet) {
+  await planetModel.findOneAndUpdate(
+    { keplerName: planet.kepler_name },
+    { keplerName: planet.kepler_name },
+    {
+      upsert: true,
+    }
+  );
+}
+
+module.exports = { loadPlanets, getAllPlanets };
