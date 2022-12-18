@@ -10,10 +10,11 @@
   },
   "author": "",
   "license": "ISC",
-  "jest":{
+  "jest": {
     "testEnvironment": "node"
   },
   "dependencies": {
+    "axios": "^1.2.1",
     "cors": "^2.8.5",
     "csv-parse": "^5.3.3",
     "dotenv": "^16.0.3",
