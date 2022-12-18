@@ -1,21 +1,11 @@
 const axios = require("axios");
+require("dotenv").config();
 
 const launchDatabase = require("./launches.mongo");
 const planetDataBase = require("./planets.mongo");
 
-let DEFAULT_FLIGHT_NUMBER = 100;
-let API_URL = "https://api.spacexdata.com/v4/launches/query";
-
-const launch = {
-  flightNumber: 100, //flight_number
-  mission: "Kepler Exploration X", //name
-  rocket: "Explorer IS1", //rocket.name
-  launchDate: new Date("11/06/2024"), //date_local
-  target: "Kepler-442 b", //Not Applicable
-  customers: ["ZTM", "NASA"], //payloads.customers
-  upcoming: true, //upcoming
-  success: true, //success
-};
+let DEFAULT_FLIGHT_NUMBER = process.env.DEFAULT_FLIGHT_NUMBER;
+let API_URL = process.env.API_URL;
 
 async function launchExists(launchId) {
   return await findLaunch({ flightNumber: launchId });
@@ -62,8 +52,12 @@ async function abortLaunchById(launchId) {
   return aborted.acknowledged === true && aborted.modifiedCount === 1;
 }
 
-async function getLaunches() {
-  return await launchDatabase.find({}, "-_id -__v");
+async function getLaunches(skip, limit) {
+  return await launchDatabase
+    .find({}, "-_id -__v")
+    .sort({ flightNumber: 1 })
+    .skip(skip)
+    .limit(limit);
 }
 
 async function findLaunch(filter) {
