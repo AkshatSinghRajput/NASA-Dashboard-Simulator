@@ -12,7 +12,7 @@
     "watch": "npm run server & npm run client",
     "deploy":"npm run build --prefix Client && npm start --prefix Server",
     "deploy-cluster":"npm run build --prefix Client && npm run cluster --prefix Server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test --prefix Client && npm run test --prefix Server"
   },
   "keywords": [],
   "author": "",
