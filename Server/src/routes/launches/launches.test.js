@@ -1,11 +1,14 @@
 const request = require("supertest");
 const app = require("../../app");
 const { connectMongo, disConnectMongo } = require("../../services/mongo");
+const {addNewLaunch} = require('../launches/launches.controller');
+
 
 // For Get Routes
 describe("Testing API for Launches", () => {
   beforeAll(async () => {
     await connectMongo();
+    await addNewLaunch();
   });
 
   // afterAll(async () => {
