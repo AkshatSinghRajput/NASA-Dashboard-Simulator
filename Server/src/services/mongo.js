@@ -10,7 +10,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 async function connectMongo() {
-  await mongoose.connect(process.env.MONGO_URI, {
+  await mongoose.connect(process.env.MONGO_URI_2, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
