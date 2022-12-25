@@ -5,6 +5,7 @@ const { loadPlanets } = require("../../model/planets.model");
 
 describe("Launches API", () => {
   beforeAll(async () => {
+    jest.setTimeout(30000);
     await connectMongo();
     await loadPlanets();
   });
