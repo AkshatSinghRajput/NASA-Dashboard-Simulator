@@ -14,15 +14,6 @@ describe("Launches API", () => {
     await disConnectMongo();
   });
 
-  describe("Test GET /launches", () => {
-    test("It should respond with 200 success", async () => {
-      const response = await request(app)
-        .get("/v1/launches")
-        .expect("Content-Type", /json/)
-        .expect(200);
-    });
-  });
-
   describe("Test POST /launch", () => {
     const completeLaunchData = {
       mission: "USS Enterprise",
@@ -80,6 +71,14 @@ describe("Launches API", () => {
       expect(response.body).toStrictEqual({
         error: "Date is not valid",
       });
+    });
+  });
+  describe("Test GET /launches", () => {
+    test("It should respond with 200 success", async () => {
+      const response = await request(app)
+        .get("/v1/launches")
+        .expect("Content-Type", /json/)
+        .expect(200);
     });
   });
 });
