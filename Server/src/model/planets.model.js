@@ -24,9 +24,9 @@ function loadPlanets() {
           columns: true,
         })
       )
-      .on("data", (data) => {
+      .on("data", async (data) => {
         if (inhabitablePlanet(data)) {
-          createPlanet(data);
+          await createPlanet(data);
         }
       })
       .on("error", (err) => {
