@@ -8,8 +8,9 @@ jobs:
   build:
     env:
       CI: true
-      MONGO_URI: mongodb://localhost/nasa
-      API_URL: https://api.spacexdata.com/v4/launches/query
+      MONGO_URI: 'mongodb://localhost/nasa'
+      API_URL: 'https://api.spacexdata.com/v4/launches/query'
+      CORS_URL: 'http://localhost:3000'
     strategy:
       matrix:
         node-version: [14.x, 16.x]
